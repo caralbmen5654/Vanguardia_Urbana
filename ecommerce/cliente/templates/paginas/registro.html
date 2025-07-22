@@ -1,0 +1,50 @@
+{% extends "base_login.html" %}
+
+{% block titulo_login %} 
+    Registro
+{% endblock %}
+
+
+{% block encabezado %} Registro {% endblock %}
+
+
+ {% block submits %}
+    <style>
+        a{
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.7dvh;
+        }
+        a:hover{
+            
+            text-decoration: underline;
+        }
+        .grupo{
+            margin: 2dvh 0dvh;
+        }
+    </style>
+    <form method="post" style="align-items: center;">
+        {% csrf_token %}
+
+        <div class="grupo mb-3">
+            {{ form.correo.label }}
+            {{ form.correo }}
+        <div class="grupo mb-3">
+            {{ form.contrasenia.label }}
+            {{ form.contrasenia }}
+           
+        </div>
+        <div class="grupo mb-3">
+            {{ form.telefono.label }}
+            {{ form.telefono }}
+           
+        </div>
+        <div style="text-align: center; margin-top: 2dvh;">
+            <button type="submit" id="boton_login" class="btn boton">
+                Registrarme
+                </button>
+                 <a href="{% url 'login' %}">Login</a>
+        </div>
+       
+    </form>
+ {% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base_login.html" %}
+
+{% block titulo_login %} 
+    Login
+{% endblock %}
+
+{% block encabezado %} Login {% endblock %}
+
+ {% block submits %}
+  <style>
+        a{
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.7dvh;
+        }
+        a:hover{
+            
+            text-decoration: underline;
+        }
+    </style>
+    {% if messages %}
+
+       {% for message in messages %}
+            <script>
+                alert("{{ message }}");
+            </script>
+       {% endfor %}
+        <!-- {% for message in messages %}
+            <div class="alert alert-info" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+         -->
+    {% endif %}
+
+    <form method="post" style="align-items: center;">
+        {% csrf_token %}
+        <div class="mb-3">
+           
+            {{ formulario.correo.label }}
+            {{ formulario.correo }}
+        </div>
+        <div class="mb-3">
+            {{ formulario.contrasenia.label }}
+            {{ formulario.contrasenia }}
+        </div>
+        <div class="gropuRegistro" style="text-align: center;">
+             <button type="submit" id="boton_login" class="btn boton">
+            Iniciar Sesión
+            </button>
+            <a href="{% url 'registro' %}">Registrarme</a>
+        </div>
+       
+    </form>
+ {% endblock %}
+

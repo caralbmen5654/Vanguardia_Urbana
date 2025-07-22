@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<style>
+   /* Cambioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooos */
+</style>
+<div class="container mt-4" style="color: white;">
+    <h2 class="mb-4">Agregar Nuevo Producto</h2>
+    
+    <form method="POST" enctype="multipart/form-data" class="border p-4 rounded">
+        {% csrf_token %}
+        <h5 style="float:right">{{usuario}}</h5>
+        <h4 class="mb-3">Información</h4>
+        <div class="mb-3">
+            {{ form_producto.nombre.label_tag }}
+            {{ form_producto.nombre }}
+            <small class="text-muted">Ej: Camiseta Premium</small>
+        </div>
+        
+        <div class="mb-3">
+            {{ form_producto.descripcion.label_tag }}
+            {{ form_producto.descripcion }}
+        </div>
+        
+        <div class="mb-3 col-md-3">
+            {{ form_producto.precio_base.label_tag }}
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                {{ form_producto.precio_base }}
+            </div>
+        </div>
+        
+        <hr class="my-4">
+        
+        <h4 class="mb-3">Variante Inicial</h4>
+        <div class="row g-3">
+            <div class="col-md-4">
+                {{ variante_form.color.label_tag }}
+                {{ variante_form.color }}
+            </div>
+            
+            <div class="col-md-4">
+                {{ variante_form.stock.label_tag }}
+                {{ variante_form.stock }}
+            </div>
+            
+            <div class="col-md-4">
+                {{ variante_form.sku.label_tag }}
+                {{ variante_form.sku }}
+                <small class="text-muted">Ej: PROD-RO-001</small>
+            </div>
+            <div>
+
+            </div>
+            <div class="col-12">
+                {{ variante_form.imagen.label_tag }}
+                {{ variante_form.imagen }}
+                <small class="text-muted">Formatos: JPG, PNG (Máx. 5MB)</small>
+            </div>
+        </div>
+        
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Guardar Producto
+            </button>
+            <a href="{% url 'home_vendedor' %}" class="btn btn-outline-secondary">
+                Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

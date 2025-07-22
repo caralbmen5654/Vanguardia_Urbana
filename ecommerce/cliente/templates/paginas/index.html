@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block titulo %} Home {% endblock %}
+
+{% block contenido %}
+<!-- <h1 style="color:white">Panel de Vendedor</h1>
+
+
+
+
+alknv fimncsowhfvnoisjkvnwrifjkñdncj
+Cambios A partir de aqui
+
+<a style="color: white;" href="{% url 'actualizarProducto' %}">Actualizar</a> -->
+<style>
+    .productos{
+        margin-top: 7dvh;
+        @media screen and (max-width: 550px){
+            margin-top: 12dvh;
+        }
+    }
+   
+    .cardd{
+        max-height: 100%;
+    }
+</style>  
+{% for variante in variantes %}
+                <div class="producto col">
+                    <div class="card h-100">
+                        <div class="cardd card-body">
+                            <p style="font-size: 1.2dvh; background-color: transparent;"> Vendedor: {{variante.producto.usuario.correo}}</p>
+                          
+                            <h5 class="nombress card-title">
+                                {{ variante.producto.nombre }}
+                            </h5>
+                            <!-- <img class="imagen" src="{{variante.imagen.url}}" alt="{{variante.nombre}}"> -->
+                            <div class="imagen"
+                            style="background-image: url('{{variante.imagen.url}}');">
+
+                            </div>
+                            <p class="detalles card-text" style="text-align: left;">
+                                {{ variante.producto.descripcion }}
+                            </p>
+                            <p class="detalles card-text">
+                                Precio: ${{ variante.producto.precio_base }}
+                            </p>
+                            <style>
+                                .bi:hover{
+                                    scale: 1.3;
+                                }
+                            </style>
+                            <form method="post" style="align-items: center;">
+                                 <span style="font-size: 2dvh;">
+                                    <button type="submit" class="bi bi-cart4"style="color: green; border:none;background-color: transparent; "></button>
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      <nbsp></nbsp>
+                                      <nbsp></nbsp>
+                                    <button type="submit" class="bi bi-heart"style="color: red; border:none;background-color: transparent; "></button>
+                                </span>
+                            </form>
+                           
+                        </div>
+                    </div>
+                </div>
+                
+            {% endfor %}
+
+{% endblock %}
+{%block iconoo%}
+    <a href="{% url 'base_login' %}" class="perfil"><i class="bi bi-person"></i></a> 
+{%endblock%}
+{% block perfil %}
+    <a class="perfil_texto" href="{% url 'base_login' %}">Vendedor</a>
+{% endblock%}
+<!-- {% block footer %}
+
+<footer>
+        <div class="redes">
+            <table>
+                <tr>
+                    <td><a href="#"><i class="bi bi-facebook"></i></a></td>
+                    <td><a href="#"><i class="bi bi-instagram"></i></a></td>
+                    <td><a href="#"><i class="bi bi-twitter"></i></a></td>
+                    <td><a href="{% url 'base_login' %}" class="perfil"><i class="bi bi-person"></i></a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">Vanguard_urbana</a></td>
+                    <td><a href="#">@Vanguard_Urbana</a></td>
+                    <td><a href="#">@Vanguard_Urbana</a></td>
+                    <td><a class="perfil_texto" href="{% url 'base_login' %}">Vendedor</a></td>
+                </tr>
+            </table>
+        </div>
+    </footer>
+{% endblock %} -->
