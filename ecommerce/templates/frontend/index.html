@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanguardia Urbana - Inicio</title>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">Vanguardia <span>Urbana</span></div>
+      <nav class="nav">
+        <a href="{% url 'frontend_home' %}">Inicio</a>
+        <a href="{% url 'frontend_catalogo' %}">Productos</a>
+        <a href="{% url 'frontend_personaliza' %}">Personaliza</a>
+        <a href="{% url 'frontend_carrito' %}" class="cart-icon" title="Ver carrito" style="display:inline-flex;align-items:center;gap:0.4em;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 18C6.44772 18 6 18.4477 6 19C6 19.5523 6.44772 20 7 20C7.55228 20 8 19.5523 8 19C8 18.4477 7.55228 18 7 18Z" fill="#d4af37"/>
+            <path d="M17 18C16.4477 18 16 18.4477 16 19C16 19.5523 16.4477 20 17 20C17.5523 20 18 19.5523 18 19C18 18.4477 17.5523 18 17 18Z" fill="#d4af37"/>
+            <path d="M3 4H5L6.68 15.39C6.7716 16.0282 7.31213 16.5 7.96 16.5H18.5C19.0523 16.5 19.5272 16.1482 19.6842 15.6266L21.5 9.5H6.21" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span style="color:#d4af37;font-weight:600;"></span>
+        </a>
+        <a href="{% url 'frontend_login' %}">Login</a>
+      </nav>
+    </div>
+  </header>
+  <section class="hero">
+    <div class="container hero-content">
+      <h1>Diseña tu producto con <span>elegancia</span></h1>
+      <p>Personaliza productos únicos con nuestro editor intuitivo y descubre la colección exclusiva de Vanguardia IU.</p>
+      <a href="{% url 'frontend_catalogo' %}" class="btn-main">Ver productos</a>
+    </div>
+  </section>
+  <section class="featured-products">
+    <div class="container">
+      <h2>Productos Destacados</h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <img src="{% static 'img/1vanu.jpeg' %}" alt="Producto 1">
+          <h3>Producto Premium</h3>
+          <p>Calidad y diseño en cada detalle.</p>
+          <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Personalizar</a>
+        </div>
+        <div class="product-card">
+          <img src="{% static 'img/2vanu.jpeg' %}" alt="Producto 2">
+          <h3>Edición Limitada</h3>
+          <p>Exclusividad para ti.</p>
+          <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Personalizar</a>
+        </div>
+        <div class="product-card">
+          <img src="{% static 'img/3vanu.jpeg' %}" alt="Producto 3">
+          <h3>Clásico Moderno</h3>
+          <p>Elegancia atemporal.</p>
+          <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Personalizar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="custom-section">
+    <div class="container custom-content">
+      <h2>Personaliza a tu estilo</h2>
+      <p>Utiliza nuestro editor para crear productos que reflejen tu personalidad. ¡Es fácil, rápido y divertido!</p>
+      <a href="{% url 'frontend_personaliza' %}" class="btn-main">Comenzar a personalizar</a>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>© 2024 Vanguardia Urbana. Todos los derechos reservados.</div>
+      <div class="footer-links">
+        <a href="{% url 'frontend_contacto' %}">Contacto</a>
+        <a href="{% url 'frontend_sobre' %}">Sobre nosotros</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html> 

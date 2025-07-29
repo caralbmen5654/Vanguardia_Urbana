@@ -1,0 +1,243 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personaliza | Vanguardia Urbana</title>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <style>
+    .editor {
+      background: #232526;
+      border-radius: 18px;
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 600px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      text-align: center;
+    }
+    .editor input, .editor select {
+      margin: 1rem 0;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: none;
+      width: 80%;
+      font-size: 1rem;
+    }
+    .editor label {
+      display: block;
+      margin-top: 1rem;
+      color: #d4af37;
+      font-weight: 600;
+    }
+    .preview {
+      margin: 2rem 0;
+      background: #181818;
+      border-radius: 12px;
+      padding: 1.5rem;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">Vanguardia <span>Urbana</span></div>
+      <nav class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="personaliza.html">Personaliza</a>
+        <a href="carrito.html">Carrito</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="sobre.html">Sobre Nosotros</a>
+      </nav>
+    </div>
+  </header>
+  <section>
+    <div class="container">
+      <h2 style="color:#d4af37;text-align:center;margin-top:2rem;">Personaliza tu Producto</h2>
+      <div class="editor">
+        <label for="color">Color principal</label>
+        <select id="color">
+          <option>Negro</option>
+          <option>Blanco</option>
+          <option>Dorado</option>
+          <option>Gris</option>
+        </select>
+        <label for="texto">Texto personalizado</label>
+        <input type="text" id="texto" placeholder="Escribe tu mensaje...">
+        <label for="imgInput">O sube una imagen</label>
+        <input type="file" id="imgInput" accept="image/*">
+        <div id="konva-container" style="width:320px; height:400px; margin:2rem auto; border-radius:12px; background:#181818;"></div>
+        <div style="margin:1rem 0; display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; align-items:center;">
+          <button id="deleteImgBtn" type="button" style="padding:0.5rem 1rem; border-radius:6px; border:none; background:#c00; color:#fff; font-weight:700; cursor:pointer;">Eliminar imagen</button>
+          <button id="deleteTextBtn" type="button" style="padding:0.5rem 1rem; border-radius:6px; border:none; background:#c00; color:#fff; font-weight:700; cursor:pointer;">Eliminar texto</button>
+          <label style="color:#d4af37; font-weight:600;">Color texto
+            <input type="color" id="colorPicker" value="#d4af37" style="margin-left:0.5rem;">
+          </label>
+          <button id="rotateImgBtn" type="button" style="padding:0.5rem 1rem; border-radius:6px; border:none; background:#d4af37; color:#181818; font-weight:700; cursor:pointer;">Rotar imagen</button>
+          <button id="rotateTextBtn" type="button" style="padding:0.5rem 1rem; border-radius:6px; border:none; background:#d4af37; color:#181818; font-weight:700; cursor:pointer;">Rotar texto</button>
+        </div>
+        <a href="carrito.html" class="btn-main">Añadir al carrito</a>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>© 2024 Vanguardia Urbana. Todos los derechos reservados.</div>
+      <div class="footer-links">
+        <a href="#">Política de privacidad</a>
+        <a href="#">Términos de uso</a>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/konva@9.2.2/konva.min.js"></script>
+  <script>
+    // --- Konva.js Mockup Generator ---
+    const width = 320;
+    const height = 400;
+    const areaX = 60, areaY = 100, areaW = 200, areaH = 200;
+    const stage = new Konva.Stage({
+      container: 'konva-container',
+      width: width,
+      height: height
+    });
+    const layer = new Konva.Layer();
+    stage.add(layer);
+
+    // Imagen base (camiseta)
+    const baseImg = new Konva.Image({
+      x: 0, y: 0, width: width, height: height
+    });
+    layer.add(baseImg);
+    const baseObj = new window.Image();
+    baseObj.src = 'assets/img/blank1.jpeg';
+    baseObj.onload = function() {
+      baseImg.image(baseObj);
+      layer.draw();
+    };
+
+    // Grupo para zona de impresión
+    const printGroup = new Konva.Group({
+      x: areaX, y: areaY,
+      width: areaW, height: areaH,
+      clip: { x: 0, y: 0, width: areaW, height: areaH }
+    });
+    layer.add(printGroup);
+
+    // Transformer global
+    const tr = new Konva.Transformer({
+      enabledAnchors: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+      boundBoxFunc: function(oldBox, newBox) {
+        // Limitar dentro del área de impresión
+        if (newBox.width < 30 || newBox.height < 30) return oldBox;
+        if (newBox.x < 0 || newBox.y < 0 || newBox.x + newBox.width > areaW || newBox.y + newBox.height > areaH) return oldBox;
+        return newBox;
+      }
+    });
+    layer.add(tr);
+
+    // Imagen personalizada
+    let userKonvaImg = null;
+    // Texto personalizado
+    const input = document.getElementById('texto');
+    let userKonvaText = null;
+
+    // Función para seleccionar un nodo y mostrar el transformer
+    function selectNode(node) {
+      if (node) {
+        tr.nodes([node]);
+      } else {
+        tr.nodes([]);
+      }
+      layer.draw();
+    }
+
+    // Subir imagen
+    document.getElementById('imgInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) {
+        if (userKonvaImg) { userKonvaImg.destroy(); userKonvaImg = null; selectNode(null); layer.draw(); }
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const imgObj = new window.Image();
+        imgObj.onload = function() {
+          if (userKonvaImg) userKonvaImg.destroy();
+          // Tamaño inicial: 60% del área de impresión
+          const scale = 0.6;
+          const initW = areaW * scale;
+          const initH = areaH * scale;
+          const initX = (areaW - initW) / 2;
+          const initY = (areaH - initH) / 2;
+          userKonvaImg = new Konva.Image({
+            image: imgObj,
+            x: initX, y: initY,
+            width: initW, height: initH,
+            draggable: true,
+            shadowColor: '#000',
+            shadowBlur: 8,
+            shadowOpacity: 0.2
+          });
+          printGroup.add(userKonvaImg);
+          userKonvaImg.moveToTop();
+          userKonvaImg.on('click tap', function() { selectNode(userKonvaImg); });
+          selectNode(userKonvaImg);
+          layer.draw();
+        };
+        imgObj.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // Crear texto personalizado
+    input.addEventListener('input', () => {
+      if (!userKonvaText) {
+        userKonvaText = new Konva.Text({
+          text: input.value,
+          x: 0, y: areaH - 40,
+          width: areaW,
+          fontSize: 24,
+          fontFamily: 'Montserrat',
+          fill: '#d4af37',
+          align: 'center',
+          shadowColor: '#000',
+          shadowBlur: 8,
+          draggable: true
+        });
+        printGroup.add(userKonvaText);
+        userKonvaText.on('click tap', function() { selectNode(userKonvaText); });
+      }
+      userKonvaText.text(input.value);
+      if (!input.value) { userKonvaText.hide(); if(tr.nodes()[0] === userKonvaText) selectNode(null); } else { userKonvaText.show(); }
+      layer.draw();
+    });
+
+    // --- Controles extra ---
+    document.getElementById('deleteImgBtn').onclick = function() {
+      if (userKonvaImg) { userKonvaImg.destroy(); userKonvaImg = null; selectNode(null); layer.draw(); }
+    };
+    document.getElementById('deleteTextBtn').onclick = function() {
+      if (userKonvaText) { userKonvaText.text(''); userKonvaText.hide(); selectNode(null); layer.draw(); input.value = ''; }
+    };
+    document.getElementById('colorPicker').oninput = function(e) {
+      if (userKonvaText) { userKonvaText.fill(e.target.value); layer.draw(); }
+    };
+    document.getElementById('rotateImgBtn').onclick = function() {
+      if (userKonvaImg && tr.nodes()[0] === userKonvaImg) { userKonvaImg.rotation((userKonvaImg.rotation() + 15) % 360); layer.draw(); }
+    };
+    document.getElementById('rotateTextBtn').onclick = function() {
+      if (userKonvaText && tr.nodes()[0] === userKonvaText) { userKonvaText.rotation((userKonvaText.rotation() + 15) % 360); layer.draw(); }
+    };
+
+    // Permitir seleccionar con click
+    stage.on('click tap', function(e) {
+      if (e.target === stage || e.target === baseImg || e.target === printGroup) {
+        selectNode(null);
+      }
+    });
+  </script>
+</body>
+</html> 

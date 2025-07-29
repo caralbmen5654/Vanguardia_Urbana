@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo | Vanguardia Urbana</title>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">Vanguardia <span>Urbana</span></div>
+      <nav class="nav">
+        <a href="{% url 'frontend_home' %}">Inicio</a>
+        <a href="{% url 'frontend_catalogo' %}">Catálogo</a>
+        <a href="{% url 'frontend_personaliza' %}">Personaliza</a>
+        <a href="{% url 'frontend_carrito' %}">Carrito</a>
+        <a href="{% url 'frontend_perfil' %}">Perfil</a>
+        <a href="{% url 'frontend_contacto' %}">Contacto</a>
+        <a href="{% url 'frontend_sobre' %}">Sobre Nosotros</a>
+      </nav>
+    </div>
+  </header>
+  <section class="featured-products">
+    <div class="container">
+      <h2>Catálogo de Productos</h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <img src="{% static 'img/product1.jpg' %}" alt="Producto 1">
+          <h3>Producto Premium</h3>
+          <p>Calidad y diseño en cada detalle.</p>
+          <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Personalizar</a>
+        </div>
+        <div class="product-card">
+          <img src="{% static 'img/product2.png' %}" alt="Producto 2">
+          <h3>Edición Limitada</h3>
+          <p>Exclusividad para ti.</p>
+          <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Personalizar</a>
+        </div>
+        <div class="product-card">
+          <img src="{% static 'img/product3.jpg' %}" alt="Producto 3">
+          <h3>Clásico Moderno</h3>
+          <p>Elegancia atemporal.</p>
+          <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Personalizar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>© 2024 Vanguardia Urbana. Todos los derechos reservados.</div>
+      <div class="footer-links">
+        <a href="{% url 'frontend_contacto' %}">Contacto</a>
+        <a href="{% url 'frontend_sobre' %}">Sobre Nosotros</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html> 

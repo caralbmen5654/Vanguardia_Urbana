@@ -15,5 +15,17 @@ urlpatterns = [
          views.actualizarProducto,
          name='actualizarProducto',
     ),
-    path('anadirProducto', views.addProducto, name='addProducto')
+    path('anadirProducto', views.addProducto, name='addProducto'),
+    
+    # URLs del frontend integrado
+    path('frontend/', views.frontend_home, name='frontend_home'),
+    path('frontend/catalogo/', views.frontend_catalogo, name='frontend_catalogo'),
+    path('frontend/carrito/', views.frontend_carrito, name='frontend_carrito'),
+    path('frontend/checkout/', views.frontend_checkout, name='frontend_checkout'),
+    path('frontend/contacto/', views.frontend_contacto, name='frontend_contacto'),
+    path('frontend/login/', views.frontend_login, name='frontend_login'),
+    path('frontend/perfil/', views.frontend_perfil, name='frontend_perfil'),
+    path('frontend/personaliza/', views.frontend_personaliza, name='frontend_personaliza'),
+    path('frontend/signin/', views.frontend_signin, name='frontend_signin'),
+    path('frontend/sobre/', views.frontend_sobre, name='frontend_sobre'),
 ]

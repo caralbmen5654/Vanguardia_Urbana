@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | Vanguardia Urbana</title>
+  <link rel="stylesheet" href="assets/css/home.css">
+  <style>
+    .contact-form {
+      background: #232526;
+      border-radius: 18px;
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 600px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    }
+    .contact-form label {
+      color: #d4af37;
+      font-weight: 600;
+      display: block;
+      margin-top: 1rem;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: none;
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+    .contact-form textarea {
+      min-height: 100px;
+    }
+    .contact-info {
+      background: #181818;
+      border-radius: 12px;
+      padding: 1.5rem;
+      color: #fff;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">Vanguardia <span>Urbana</span></div>
+      <nav class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="personaliza.html">Personaliza</a>
+        <a href="carrito.html">Carrito</a>
+        <a href="perfil.html">Perfil</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="sobre.html">Sobre Nosotros</a>
+      </nav>
+    </div>
+  </header>
+  <section>
+    <div class="container">
+      <h2 style="color:#d4af37;text-align:center;margin-top:2rem;">Contáctanos</h2>
+      <form class="contact-form">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" required>
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" required>
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" required></textarea>
+        <button type="submit" class="btn-main" style="margin-top:1.5rem;width:100%;">Enviar mensaje</button>
+      </form>
+      <div class="contact-info">
+        <strong>Atención al cliente:</strong><br>
+        Email: soporte@vanguardiaiu.com<br>
+        Teléfono: +52 55 1234 5676<br>
+        Horario de atencion: Lunes a Viernes, 9:00 a 18:00
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>© 2024 Vanguardia Urbana. Todos los derechos reservados.</div>
+      <div class="footer-links">
+        <a href="#">Política de privacidad</a>
+        <a href="#">Términos de uso</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html> 
