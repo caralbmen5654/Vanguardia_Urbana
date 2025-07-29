@@ -171,40 +171,40 @@ def actualizarProducto(request, variante_id):
 # Vistas para el frontend integrado
 def frontend_home(request):
     """Vista para la página principal del frontend"""
-    return render(request, 'frontend/index.html')
+    return render(request, 'cliente/index.html')
 
 def frontend_catalogo(request):
     """Vista para el catálogo de productos"""
-    return render(request, 'frontend/catalogo.html')
+    return render(request, 'cliente/catalogo.html')
 
 def frontend_carrito(request):
     """Vista para el carrito de compras"""
-    return render(request, 'frontend/carrito.html')
+    return render(request, 'cliente/carrito.html')
 
 def frontend_checkout(request):
     """Vista para el proceso de pago"""
-    return render(request, 'frontend/checkout.html')
+    return render(request, 'cliente/checkout.html')
 
 def frontend_contacto(request):
     """Vista para la página de contacto"""
-    return render(request, 'frontend/contacto.html')
+    return render(request, 'cliente/contacto.html')
 
 def frontend_login(request):
     """Vista para el login del frontend"""
-    return render(request, 'frontend/login.html')
+    return render(request, 'cliente/login.html')
 
 def frontend_perfil(request):
     """Vista para el perfil de usuario"""
-    return render(request, 'frontend/perfil.html')
+    return render(request, 'cliente/perfil.html')
 
 def frontend_personaliza(request):
     """Vista para personalización de productos"""
-    return render(request, 'frontend/personaliza.html')
+    return render(request, 'cliente/personaliza.html')
 
 def frontend_signin(request):
     """Vista para registro de usuarios"""
-    return render(request, 'frontend/signin.html')
+    return render(request, 'cliente/signin.html')
 
 def frontend_sobre(request):
     """Vista para la página sobre nosotros"""
-    return render(request, 'frontend/sobre.html')
+    return render(request, 'cliente/sobre.html')
