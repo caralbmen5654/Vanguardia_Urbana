@@ -1,117 +1,184 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carrito | Vanguardia Urbana</title>
-  <link rel="stylesheet" href="assets/css/home.css">
-  <style>
-    .cart-list {
-      background: #232526;
-      border-radius: 18px;
-      padding: 2rem;
-      margin: 2rem auto;
-      max-width: 700px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-    }
-    .cart-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #333;
-      padding: 1rem 0;
-    }
-    .cart-item:last-child {
-      border-bottom: none;
-    }
-    .cart-item img {
-      width: 70px;
-      border-radius: 8px;
-      margin-right: 1rem;
-    }
-    .cart-details {
-      flex: 1;
-    }
-    .cart-actions button {
-      background: #d4af37;
-      color: #181818;
-      border: none;
-      border-radius: 8px;
-      padding: 0.5rem 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-left: 0.5rem;
-    }
-    .cart-total {
-      text-align: right;
-      color: #d4af37;
-      font-size: 1.2rem;
-      margin-top: 1.5rem;
-    }
-  </style>
-</head>
-<body>
-  <header class="header">
-    <div class="container header-content">
-      <div class="logo">Vanguardia <span>Urbana</span></div>
-      <nav class="nav">
-        <a href="index.html">Inicio</a>
-        <a href="catalogo.html">Catálogo</a>
-        <a href="personaliza.html">Personaliza</a>
-        <a href="carrito.html">Carrito</a>
-        <a href="perfil.html">Perfil</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="sobre.html">Sobre Nosotros</a>
-      </nav>
-    </div>
-  </header>
+{% extends 'base_frontend.html' %}
+{% load static %}
+
+{% block title %}Carrito | Vanguardia Urbana{% endblock %}
+
+{% block extra_css %}
+<style>
+  .cart-list {
+    background: #232526;
+    border-radius: 18px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 700px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  }
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #333;
+    padding: 1rem 0;
+  }
+  .cart-item:last-child {
+    border-bottom: none;
+  }
+  .cart-item img {
+    width: 70px;
+    border-radius: 8px;
+    margin-right: 1rem;
+  }
+  .cart-details {
+    flex: 1;
+  }
+  .cart-actions button {
+    background: #d4af37;
+    color: #181818;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 0.5rem;
+  }
+  .cart-total {
+    text-align: right;
+    color: #d4af37;
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  .remove-btn {
+    background: #c53030 !important;
+    color: white !important;
+  }
+  .remove-btn:hover {
+    background: #a02020 !important;
+  }
+  .item-price {
+    color: #d4af37;
+    font-size: 0.9rem;
+  }
+  .cart-item.removing {
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
   <section>
     <div class="container">
       <h2 style="color:#d4af37;text-align:center;margin-top:2rem;">Tu Carrito</h2>
       <div class="cart-list">
-        <div class="cart-item">
-          <img src="assets/img/product1.jpg" alt="Producto 1">
+        <div class="cart-item" id="item-1">
+          <img src="{% static 'img/product1.jpg' %}" alt="Producto 1">
           <div class="cart-details">
             <strong>Producto Premium</strong><br>
             Color: Negro<br>
-            Texto: ¡Ejemplo personalizado!
+            Texto: ¡Ejemplo personalizado!<br>
+            <span class="item-price" data-price="850">$850.00 c/u</span>
           </div>
           <div class="cart-actions">
-            <button>-</button>
-            <span>1</span>
-            <button>+</button>
-            <button>Eliminar</button>
+            <button onclick="decreaseQuantity(1)">-</button>
+            <span class="quantity" id="qty-1">1</span>
+            <button onclick="increaseQuantity(1)">+</button>
+            <button onclick="removeItem(1)" class="remove-btn">Eliminar</button>
           </div>
         </div>
-        <div class="cart-item">
-          <img src="assets/img/product2.jpg" alt="Producto 2">
+        <div class="cart-item" id="item-2">
+          <img src="{% static 'img/product2.jpg' %}" alt="Producto 2">
           <div class="cart-details">
             <strong>Edición Limitada</strong><br>
             Color: Dorado<br>
-            Texto: 
+            Texto: <br>
+            <span class="item-price" data-price="825">$825.00 c/u</span>
           </div>
           <div class="cart-actions">
-            <button>-</button>
-            <span>2</span>
-            <button>+</button>
-            <button>Eliminar</button>
+            <button onclick="decreaseQuantity(2)">-</button>
+            <span class="quantity" id="qty-2">2</span>
+            <button onclick="increaseQuantity(2)">+</button>
+            <button onclick="removeItem(2)" class="remove-btn">Eliminar</button>
           </div>
         </div>
         <div class="cart-total">
-          Total: $2,500.00
+          Total: <span id="total-amount">$2,500.00</span>
         </div>
-        <a href="checkout.html" class="btn-main" style="float:right;margin-top:1.5rem;">Proceder al pago</a>
+        <a href="{% url 'frontend_checkout' %}" class="btn-main" style="float:right;margin-top:1.5rem;">Proceder al pago</a>
       </div>
     </div>
   </section>
-  <footer class="footer">
-    <div class="container footer-content">
-      <div>© 2024 Vanguardia Urbana. Todos los derechos reservados.</div>
-      <div class="footer-links">
-        <a href="#">Política de privacidad</a>
-        <a href="#">Términos de uso</a>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Función para aumentar cantidad
+function increaseQuantity(itemId) {
+  const qtyElement = document.getElementById(`qty-${itemId}`);
+  let currentQty = parseInt(qtyElement.textContent);
+  qtyElement.textContent = currentQty + 1;
+  updateTotal();
+}
+
+// Función para disminuir cantidad
+function decreaseQuantity(itemId) {
+  const qtyElement = document.getElementById(`qty-${itemId}`);
+  let currentQty = parseInt(qtyElement.textContent);
+  if (currentQty > 1) {
+    qtyElement.textContent = currentQty - 1;
+    updateTotal();
+  }
+}
+
+// Función para eliminar item
+function removeItem(itemId) {
+  const itemElement = document.getElementById(`item-${itemId}`);
+  if (confirm('¿Estás seguro de que quieres eliminar este producto del carrito?')) {
+    itemElement.classList.add('removing');
+    setTimeout(() => {
+      itemElement.remove();
+      updateTotal();
+      checkEmptyCart();
+    }, 300);
+  }
+}
+
+// Función para actualizar el total
+function updateTotal() {
+  let total = 0;
+  const cartItems = document.querySelectorAll('.cart-item:not(.removing)');
+  
+  cartItems.forEach(item => {
+    const priceElement = item.querySelector('.item-price');
+    const qtyElement = item.querySelector('.quantity');
+    
+    if (priceElement && qtyElement) {
+      const price = parseFloat(priceElement.getAttribute('data-price'));
+      const qty = parseInt(qtyElement.textContent);
+      total += price * qty;
+    }
+  });
+  
+  document.getElementById('total-amount').textContent = `$${total.toFixed(2)}`;
+}
+
+// Función para verificar si el carrito está vacío
+function checkEmptyCart() {
+  const cartItems = document.querySelectorAll('.cart-item');
+  if (cartItems.length === 0) {
+    const cartList = document.querySelector('.cart-list');
+    cartList.innerHTML = `
+      <div style="text-align:center; padding:3rem; color:#666;">
+        <h3>Tu carrito está vacío</h3>
+        <p>¡Agrega algunos productos increíbles!</p>
+        <a href="{% url 'frontend_catalogo' %}" class="btn-main">Ver productos</a>
       </div>
-    </div>
-  </footer>
-</body>
-</html> 
+    `;
+  }
+}
+
+// Actualizar total al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+  updateTotal();
+});
+</script>
+{% endblock %} 

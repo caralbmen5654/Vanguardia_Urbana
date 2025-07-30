@@ -1,62 +1,46 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personaliza | Vanguardia Urbana</title>
-  <link rel="stylesheet" href="{% static 'css/home.css' %}">
-  <style>
-    .editor {
-      background: #232526;
-      border-radius: 18px;
-      padding: 2rem;
-      margin: 2rem auto;
-      max-width: 600px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-      text-align: center;
-    }
-    .editor input, .editor select {
-      margin: 1rem 0;
-      padding: 0.7rem;
-      border-radius: 8px;
-      border: none;
-      width: 80%;
-      font-size: 1rem;
-    }
-    .editor label {
-      display: block;
-      margin-top: 1rem;
-      color: #d4af37;
-      font-weight: 600;
-    }
-    .preview {
-      margin: 2rem 0;
-      background: #181818;
-      border-radius: 12px;
-      padding: 1.5rem;
-      color: #fff;
-    }
-  </style>
-</head>
-<body>
-  <header class="header">
-    <div class="container header-content">
-      <div class="logo">Vanguardia <span>Urbana</span></div>
-      <nav class="nav">
-        <a href="index.html">Inicio</a>
-        <a href="catalogo.html">Catálogo</a>
-        <a href="personaliza.html">Personaliza</a>
-        <a href="carrito.html">Carrito</a>
-        <a href="perfil.html">Perfil</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="sobre.html">Sobre Nosotros</a>
-      </nav>
-    </div>
-  </header>
-  <section>
-    <div class="container">
-      <h2 style="color:#d4af37;text-align:center;margin-top:2rem;">Personaliza tu Producto</h2>
+{% extends 'base_frontend.html' %}
+
+{% block title %}Personaliza | Vanguardia Urbana{% endblock %}
+
+{% block extra_css %}
+<style>
+  .editor {
+    background: #232526;
+    border-radius: 18px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    text-align: center;
+  }
+  .editor input, .editor select {
+    margin: 1rem 0;
+    padding: 0.7rem;
+    border-radius: 8px;
+    border: none;
+    width: 80%;
+    font-size: 1rem;
+  }
+  .editor label {
+    display: block;
+    margin-top: 1rem;
+    color: #d4af37;
+    font-weight: 600;
+  }
+  .preview {
+    margin: 2rem 0;
+    background: #181818;
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: #fff;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section>
+  <div class="container">
+    <h2 style="color:#d4af37;text-align:center;margin-top:2rem;">Personaliza tu Producto</h2>
       <div class="editor">
         <label for="color">Color principal</label>
         <select id="color">
@@ -79,21 +63,16 @@
           <button id="rotateImgBtn" type="button" style="padding:0.5rem 1rem; border-radius:6px; border:none; background:#d4af37; color:#181818; font-weight:700; cursor:pointer;">Rotar imagen</button>
           <button id="rotateTextBtn" type="button" style="padding:0.5rem 1rem; border-radius:6px; border:none; background:#d4af37; color:#181818; font-weight:700; cursor:pointer;">Rotar texto</button>
         </div>
-        <a href="carrito.html" class="btn-main">Añadir al carrito</a>
+        <a href="{% url 'frontend_carrito' %}" class="btn-main">Añadir al carrito</a>
       </div>
     </div>
   </section>
-  <footer class="footer">
-    <div class="container footer-content">
-      <div>© 2024 Vanguardia Urbana. Todos los derechos reservados.</div>
-      <div class="footer-links">
-        <a href="#">Política de privacidad</a>
-        <a href="#">Términos de uso</a>
-      </div>
-    </div>
-  </footer>
-  <script src="https://cdn.jsdelivr.net/npm/konva@9.2.2/konva.min.js"></script>
-  <script>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/konva@9.2.2/konva.min.js"></script>
+<script>
     // --- Konva.js Mockup Generator ---
     const width = 320;
     const height = 400;
@@ -239,5 +218,4 @@
       }
     });
   </script>
-</body>
-</html> 
+{% endblock %} 

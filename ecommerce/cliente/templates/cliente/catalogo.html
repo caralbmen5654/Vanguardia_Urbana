@@ -1,27 +1,9 @@
+{% extends 'base_frontend.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo | Vanguardia Urbana</title>
-  <link rel="stylesheet" href="{% static 'css/home.css' %}">
-</head>
-<body>
-  <header class="header">
-    <div class="container header-content">
-      <div class="logo">Vanguardia <span>Urbana</span></div>
-      <nav class="nav">
-        <a href="{% url 'frontend_home' %}">Inicio</a>
-        <a href="{% url 'frontend_catalogo' %}">Catálogo</a>
-        <a href="{% url 'frontend_personaliza' %}">Personaliza</a>
-        <a href="{% url 'frontend_carrito' %}">Carrito</a>
-        <a href="{% url 'frontend_perfil' %}">Perfil</a>
-        <a href="{% url 'frontend_contacto' %}">Contacto</a>
-        <a href="{% url 'frontend_sobre' %}">Sobre Nosotros</a>
-      </nav>
-    </div>
-  </header>
+
+{% block title %}Catálogo | Vanguardia Urbana{% endblock %}
+
+{% block content %}
   <section class="featured-products">
     <div class="container">
       <h2>Catálogo de Productos</h2>
@@ -47,14 +29,4 @@
       </div>
     </div>
   </section>
-  <footer class="footer">
-    <div class="container footer-content">
-      <div>© 2024 Vanguardia Urbana. Todos los derechos reservados.</div>
-      <div class="footer-links">
-        <a href="{% url 'frontend_contacto' %}">Contacto</a>
-        <a href="{% url 'frontend_sobre' %}">Sobre Nosotros</a>
-      </div>
-    </div>
-  </footer>
-</body>
-</html> 
+{% endblock %} 

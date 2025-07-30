@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout | Vanguardia Urbana</title>
-  <link rel="stylesheet" href="assets/css/home.css">
+{% extends 'base_frontend.html' %}
+
+{% block title %}Checkout | Vanguardia Urbana{% endblock %}
+
+{% block extra_css %}
   <style>
     .checkout-form {
       background: #232526;
@@ -40,22 +38,9 @@
       width: 100%;
     }
   </style>
-</head>
-<body>
-  <header class="header">
-    <div class="container header-content">
-      <div class="logo">Vanguardia <span>Urbana</span></div>
-      <nav class="nav">
-        <a href="index.html">Inicio</a>
-        <a href="catalogo.html">Catálogo</a>
-        <a href="personaliza.html">Personaliza</a>
-        <a href="carrito.html">Carrito</a>
-        <a href="perfil.html">Perfil</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="sobre.html">Sobre Nosotros</a>
-      </nav>
-    </div>
-  </header>
+{% endblock %}
+
+{% block content %}
   <section>
     <div class="container">
       <h2 style="color:#d4af37;text-align:center;margin-top:2rem;">Finaliza tu compra</h2>
@@ -78,14 +63,4 @@
       </div>
     </div>
   </section>
-  <footer class="footer">
-    <div class="container footer-content">
-      <div>© 2024 Vanguardia Urbana. Todos los derechos reservados.</div>
-      <div class="footer-links">
-        <a href="#">Política de privacidad</a>
-        <a href="#">Términos de uso</a>
-      </div>
-    </div>
-  </footer>
-</body>
-</html> 
+{% endblock %} 

@@ -1,71 +1,56 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sobre Nosotros | Vanguardia Urbana</title>
-  <link rel="stylesheet" href="assets/css/home.css">
-  <style>
-    .about-section {
-      background: #232526;
-      border-radius: 18px;
-      padding: 2rem;
-      margin: 2rem auto;
-      max-width: 800px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
-      color: #fff;
-    }
-    .about-section h2 {
-      color: #d4af37;
-      margin-bottom: 1rem;
-    }
-    .about-section h3 {
-      color: #d4af37;
-      margin-top: 2rem;
-    }
-    .team {
-      display: flex;
-      gap: 2rem;
-      margin-top: 2rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .team-member {
-      background: #181818;
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-align: center;
-      width: 180px;
-    }
-    .team-member img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      margin-bottom: 0.7rem;
-      background: #333;
-    }
-    .team-member span {
-      display: block;
-      color: #d4af37;
-      margin-top: 0.5rem;
-    }
-  </style>
-</head>
-<body>
-  <header class="header">
-    <div class="container header-content">
-      <div class="logo">Vanguardia <span>Urbana</span></div>
-      <nav class="nav">
-        <a href="index.html">Inicio</a>
-        <a href="catalogo.html">Catálogo</a>
-        <a href="personaliza.html">Personaliza</a>
-        <a href="carrito.html">Carrito</a>
-        <a href="perfil.html">Perfil</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="sobre.html">Sobre Nosotros</a>
-      </nav>
-    </div>
-  </header>
+{% extends 'base_frontend.html' %}
+
+{% block title %}Sobre Nosotros | Vanguardia Urbana{% endblock %}
+
+{% block extra_css %}
+<style>
+  .about-section {
+    background: #232526;
+    border-radius: 18px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    color: #fff;
+  }
+  .about-section h2 {
+    color: #d4af37;
+    margin-bottom: 1rem;
+  }
+  .about-section h3 {
+    color: #d4af37;
+    margin-top: 2rem;
+  }
+  .team {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .team-member {
+    background: #181818;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    width: 180px;
+  }
+  .team-member img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 0.7rem;
+    background: #333;
+  }
+  .team-member span {
+    display: block;
+    color: #d4af37;
+    margin-top: 0.5rem;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
   <section>
     <div class="container">
       <div class="about-section">
@@ -101,14 +86,4 @@
       </div>
     </div>
   </section>
-  <footer class="footer">
-    <div class="container footer-content">
-      <div>© 2024 Vanguardia Urbana. Todos los derechos reservados.</div>
-      <div class="footer-links">
-        <a href="#">Política de privacidad</a>
-        <a href="#">Términos de uso</a>
-      </div>
-    </div>
-  </footer>
-</body>
-</html> 
+{% endblock %} 
