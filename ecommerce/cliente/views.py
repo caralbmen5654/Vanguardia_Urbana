@@ -174,8 +174,24 @@ def frontend_home(request):
     return render(request, 'cliente/index.html')
 
 def frontend_catalogo(request):
-    """Vista para el catálogo de productos"""
-    return render(request, 'cliente/catalogo.html')
+    # """Vista para el catálogo de productos"""
+    # return render(request, 'cliente/catalogo.html')
+    productos= Variante_p.objects.all()
+    return render(request,'cliente/catalogo.html',{
+        'productos':productos
+    })
+    
+
+def frontend_catalogo_vendedor(request):
+    usuario= request.session.get('usuario')
+    request.session['usuario']= usuario
+    variantes= Variante_p.objects.filter(
+        producto_id__usuario_id__correo= usuario
+    ).select_related('producto')
+    return render(request, 'cliente/catalogo_vendedor.html',{
+        'usuario':usuario,
+        'variantes':variantes
+    })
 
 def frontend_carrito(request):
     """Vista para el carrito de compras"""
@@ -190,8 +206,32 @@ def frontend_contacto(request):
     return render(request, 'cliente/contacto.html')
 
 def frontend_login(request):
-    """Vista para el login del frontend"""
-    return render(request, 'cliente/login.html')
+    # """Vista para el login del frontend"""
+    # return render(request, 'cliente/login.html')
+    if request.method == 'POST':
+        formulario= loginn(request.POST)
+        if formulario.is_valid():
+            correo= formulario.cleaned_data['correo']
+            contrasenia= formulario.cleaned_data['contrasenia']
+            try:
+                usuario= Usuario.objects.get(correo=correo)
+                if(usuario.verificar(contrasenia)):
+                    ##Login Exitoso
+                    #return render(request,'paginas/home_vendedor.html', {'usuario': usuario})
+                    request.session['usuario']= correo
+                    return redirect('frontend_catalogoVendedor')
+                else:
+                    alerts.error(request, 'Contraseña incorrecta')
+            except Usuario.DoesNotExist:
+                alerts.error(request, 'Usuario no encontrado')
+    else:
+        formulario= loginn()
+    return render(request, 'cliente/login.html', {'formulario': formulario})
+
+
+
+
+
 
 def frontend_perfil(request):
     """Vista para el perfil de usuario"""
@@ -202,8 +242,28 @@ def frontend_personaliza(request):
     return render(request, 'cliente/personaliza.html')
 
 def frontend_signin(request):
-    """Vista para registro de usuarios"""
-    return render(request, 'cliente/signin.html')
+    # """Vista para registro de usuarios"""
+    # return render(request, 'cliente/signin.html')
+    if request.method == 'POST':
+
+        form= Registro(request.POST)
+        if form.is_valid():
+            usuario= Usuario(
+                correo=form.cleaned_data['correo'],
+                contrasenia=form.cleaned_data['contrasenia'],
+                telefono= form.cleaned_data['telefono'],
+            )
+            request.session['usuario']= usuario.correo
+            usuario.save()
+            return redirect('frontend_catalogoVendedor')
+        else:
+            form = Registro()
+
+        return render(request, 'paginas/registro.html', {'form': form})
+    
+    else:
+        form = Registro()
+        return render(request, 'cliente/signin.html', {'form': form})
 
 def frontend_sobre(request):
     """Vista para la página sobre nosotros"""

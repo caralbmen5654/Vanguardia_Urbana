@@ -73,18 +73,33 @@
     <div class="container header-content">
       <div class="logo">Vanguardia <span>Urbana</span></div>
       <nav class="nav">
-        <a href="{% url 'frontend_home' %}">Inicio</a>
-        <a href="{% url 'frontend_catalogo' %}">Productos</a>
-        <a href="{% url 'frontend_personaliza' %}">Personaliza</a>
-        <a href="{% url 'frontend_carrito' %}" class="cart-icon" title="Ver carrito" style="display:inline-flex;align-items:center;gap:0.4em;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 18C6.44772 18 6 18.4477 6 19C6 19.5523 6.44772 20 7 20C7.55228 20 8 19.5523 8 19C8 18.4477 7.55228 18 7 18Z" fill="#d4af37"/>
-            <path d="M17 18C16.4477 18 16 18.4477 16 19C16 19.5523 16.4477 20 17 20C17.5523 20 18 19.5523 18 19C18 18.4477 17.5523 18 17 18Z" fill="#d4af37"/>
-            <path d="M3 4H5L6.68 15.39C6.7716 16.0282 7.31213 16.5 7.96 16.5H18.5C19.0523 16.5 19.5272 16.1482 19.6842 15.6266L21.5 9.5H6.21" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span style="color:#d4af37;font-weight:600;"></span>
-        </a>
-        <a href="{% url 'frontend_login' %}">Login</a>
+          <!-- <a href="{% url 'frontend_home' %}" class="inicio">Inicio</a> -->
+        {% block inicio %}
+          <a href="{% url 'frontend_home' %}" style="color:#d4af37 !important;">Inicio</a>
+        {% endblock %}
+
+        {% block prodcuctos %}
+            <a href="{% url 'frontend_catalogo' %}"">Productos</a>
+        {% endblock %}
+        
+        {% block personaliza %} 
+
+        {% endblock %}
+        {% block carrito %}
+          <a href="{% url 'frontend_carrito' %}" class="cart-icon" title="Ver carrito" style="display:inline-flex;align-items:center;gap:0.4em;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 18C6.44772 18 6 18.4477 6 19C6 19.5523 6.44772 20 7 20C7.55228 20 8 19.5523 8 19C8 18.4477 7.55228 18 7 18Z" fill="#d4af37"/>
+              <path d="M17 18C16.4477 18 16 18.4477 16 19C16 19.5523 16.4477 20 17 20C17.5523 20 18 19.5523 18 19C18 18.4477 17.5523 18 17 18Z" fill="#d4af37"/>
+              <path d="M3 4H5L6.68 15.39C6.7716 16.0282 7.31213 16.5 7.96 16.5H18.5C19.0523 16.5 19.5272 16.1482 19.6842 15.6266L21.5 9.5H6.21" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span style="color:#d4af37;font-weight:600;"></span>
+          </a>
+        {% endblock %}
+       
+        {% block login %}
+          <a href="{% url 'frontend_login' %}">Login</a>
+        {% endblock %}
+        
       </nav>
     </div>
   </header>

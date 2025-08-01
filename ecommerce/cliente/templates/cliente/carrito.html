@@ -2,7 +2,9 @@
 {% load static %}
 
 {% block title %}Carrito | Vanguardia Urbana{% endblock %}
-
+{% block inicio %}
+  <a href="{% url 'frontend_home' %}" style="color:white">Inicio</a>
+{% endblock %}
 {% block extra_css %}
 <style>
   .cart-list {

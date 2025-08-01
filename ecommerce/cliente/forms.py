@@ -45,7 +45,8 @@ class formProducto(forms.ModelForm):
 class Varianteform(forms.ModelForm):
     class Meta:
         model= Variante_p
-        fields= ['color', 'imagen', 'stock', 'sku']
+        #fields= ['color', "" 'imagen', "" 'stock', 'sku']
+        fields=['color', 'stock', 'sku']
         labels= {
             'stock': 'Unidades Disponibles',
             'color': 'Colores disponibles'
@@ -53,7 +54,7 @@ class Varianteform(forms.ModelForm):
        
         widgets={
             'color': forms.Select(attrs={'class':'form-select'}),
-            'imagen': forms.FileInput(attrs={'class': 'form-control'}),
+            #'imagen': forms.FileInput(attrs={'class': 'form-control'}),
             'stock': forms.NumberInput(attrs={'class': 'form-control', 'mn': 0}),
             'sku': forms.TextInput(attrs={'class': 'form-control'}),
 
