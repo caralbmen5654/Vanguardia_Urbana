@@ -1,72 +1,122 @@
-{% extends 'base.html' %}
+{% extends 'cliente/catalogo_vendedor.html' %}
 
-{% block contenido %}
+{% block content %}
 <style>
    /* Cambioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooos */
+   /* .container{
+        background-color: white;
+   }  */
+   .formSection{
+        width: 100%;
+        /* border: 1px solid white; */
+        /* justify-content: baseline; */
+        display: grid;
+        align-items: center;
+        margin: 4dvh;
+    }
+    .formulario{
+        width: 90%;
+        /* display: table-row-group; */
+        justify-content: center;
+        /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+        /* background-color: white; */
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    form input{
+        background-color: transparent;
+        color: white;
+    }
+    textarea{
+        background-color: transparent;
+        color: white;
+    }
+    .form-select{
+        background-color: transparent;
+        color: white;
+    }
+    .form-select option{
+        background-color: black;
+        color: white;
+    }
+    .btn-secondary:hover{
+        background-color: transparent;
+        scale: 1.03;
+    }
 </style>
-<div class="container mt-4" style="color: white;">
+<div class="container mt-4" style="color: white; ">
     <h2 class="mb-4">Agregar Nuevo Producto</h2>
-    
-    <form method="POST" enctype="multipart/form-data" class="border p-4 rounded">
-        {% csrf_token %}
-        <h5 style="float:right">{{usuario}}</h5>
-        <h4 class="mb-3">Información</h4>
-        <div class="mb-3">
-            {{ form_producto.nombre.label_tag }}
-            {{ form_producto.nombre }}
-            <small class="text-muted">Ej: Camiseta Premium</small>
-        </div>
-        
-        <div class="mb-3">
-            {{ form_producto.descripcion.label_tag }}
-            {{ form_producto.descripcion }}
-        </div>
-        
-        <div class="mb-3 col-md-3">
-            {{ form_producto.precio_base.label_tag }}
-            <div class="input-group">
-                <span class="input-group-text">$</span>
-                {{ form_producto.precio_base }}
-            </div>
-        </div>
-        
-        <hr class="my-4">
-        
-        <h4 class="mb-3">Variante Inicial</h4>
-        <div class="row g-3">
-            <div class="col-md-4">
-                {{ variante_form.color.label_tag }}
-                {{ variante_form.color }}
+    <div style="width: 100%; display: flex;">
+        <h4 class="mb-3" style="width: 50%; float: left;">Información</h4>
+        <h5 style="float:right; width: 50%; text-align: right;">{{usuario}}</h5>
+    </div>
+    <div style="border-color: 1px solid white; width: 100%;">
+        <form method="POST" enctype="multipart/form-data" class="formulario">
+            {% csrf_token %}
+            <div class="formSection">
+                {{ form_producto.nombre.label_tag }}
+                {{ form_producto.nombre }}
+                <small class="text-muted">Ej: Camiseta Premium</small>
             </div>
             
-            <div class="col-md-4">
-                {{ variante_form.stock.label_tag }}
-                {{ variante_form.stock }}
+            <div class="formSection">
+                {{ form_producto.descripcion.label_tag }}
+                {{ form_producto.descripcion }}
             </div>
             
-            <div class="col-md-4">
-                {{ variante_form.sku.label_tag }}
-                {{ variante_form.sku }}
-                <small class="text-muted">Ej: PROD-RO-001</small>
+            <div class="formSection">
+                {{ form_producto.precio_base.label_tag }}
+                <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    {{ form_producto.precio_base }}
+                </div>
             </div>
+            
+            <hr class="my-4">
+            
+            <h4 class="mb-3">Variante Inicial</h4>
             <div>
-
+                <div class="formSection">
+                    {{ variante_form.color.label_tag }}
+                    {{ variante_form.color }}
+                </div>
+                
+                <div class="formSection">
+                    {{ variante_form.stock.label_tag }}
+                    {{ variante_form.stock }}
+                </div>
+                
+                <div  class="formSection">
+                    {{ variante_form.sku.label_tag }}
+                    {{ variante_form.sku }}
+                    <small class="text-muted">Ej: PROD-RO-001</small>
+                </div>
+               
+                <!-- <div class="formSection">
+                    {{ variante_form.imagen.label_tag }}
+                    {{ variante_form.imagen }}
+                    <small class="text-muted">Formatos: JPG, PNG (Máx. 5MB)</small>
+                </div> -->
+               
             </div>
-            <div class="col-12">
-                {{ variante_form.imagen.label_tag }}
-                {{ variante_form.imagen }}
-                <small class="text-muted">Formatos: JPG, PNG (Máx. 5MB)</small>
+            <h4>Imagen</h4>
+            <div class="formSection">
+               <span>
+                    <label for="imgInput">Sube una imagen</label>
+                    &nbsp;
+                    <input type="file" id="imgInput" accept="image/*" style="border: 1px solid white;">
+                    
+               </span>
             </div>
-        </div>
-        
-        <div class="mt-4">
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-save"></i> Guardar Producto
-            </button>
-            <a href="{% url 'home_vendedor' %}" class="btn btn-outline-secondary">
-                Cancelar
-            </a>
-        </div>
-    </form>
+            
+            <div class="formSection">
+                <button type="submit" class="btn-secondary" style="color:greenyellow; border-color: greenyellow;">
+                    Guardar Producto
+                </button>
+                <a href="{% url 'frontend_catalogoVendedor' %}" class="btn-secondary" style="margin-top: 1dvh; color: red; border-color: red; text-align: center;">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

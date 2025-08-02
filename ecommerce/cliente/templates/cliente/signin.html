@@ -12,12 +12,13 @@
     .signin-container button:hover { background: #bfa13a; }
     .signin-container .error { color: #c00; text-align: center; margin-bottom: 1rem; }
     .signin-container .success { color: #090; text-align: center; margin-bottom: 1rem; }
+  </style>
 {% endblock %}
 
 {% block content %}
   <div class="signin-container">
     <h2>Registro de Usuario</h2>
-    <form method="POST" class="signin-form">
+    <!-- <form method="POST" class="signin-form">
       <div class="form-group">
         <input type="text" name="name" placeholder="Nombre completo" required>
       </div>
@@ -31,10 +32,35 @@
         <input type="password" name="password_confirm" placeholder="Confirmar contraseña" required>
       </div>
       <button type="submit">Registrarse</button>
+    </form> -->
+     <form method="post" style="align-items: center; color: #181818;">
+        {% csrf_token %}
+
+        <div class="form-group">
+            {{ form.correo.label }}
+            {{ form.correo }}
+        </div>
+        <div class="grupo mb-3">
+            {{ form.contrasenia.label }}
+            {{ form.contrasenia }}
+           
+        </div>
+        <div class="grupo mb-3">
+            {{ form.telefono.label }}
+            {{ form.telefono }}
+           
+        </div>
+        <div style="text-align: center; margin-top: 2dvh;">
+            <button type="submit" id="boton_login" class="btn boton">
+                Registrarme
+                </button>
+                 <!-- <a href="{% url 'login' %}">Login</a> -->
+        </div>
+       
     </form>
     
-    <div class="signin-links">
-      <p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+    <div class="signin-links" style="text-align: center; color: black;">
+      <p>¿Ya tienes cuenta? <a href="{% url 'frontend_login' %}">Inicia sesión aquí</a></p>
       <p><a href="{% url 'frontend_home' %}">Volver al inicio</a></p>
     </div>
   </div>

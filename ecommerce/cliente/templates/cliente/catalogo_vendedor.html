@@ -1,0 +1,57 @@
+{% extends 'base_frontend.html' %}
+{% load static %}
+
+{% block title %}Catálogo | Vanguardia Urbana{% endblock %}
+{% block inicio %}
+  <!-- <a href="{% url 'frontend_home' %}" style="color:#ffffff"></a> -->
+  <a href="{% url 'frontend_home' %}">Logout</a>
+{% endblock %}
+
+{% block personaliza %}
+  <a href="{% url 'frontend_personaliza' %}"></a>
+{% endblock %}
+
+{% block prodcuctos %}
+    <a href="{% url 'frontend_catalogoVendedor' %}"style="color:#d4af37">Productos</a>
+{% endblock %}
+{% block carrito %}
+{% endblock %}
+<!-- {% block login %}
+  <a href="{% url 'frontend_home' %}"></a>
+{% endblock %}
+ -->
+
+  
+{% block content %}
+ </style>
+  <section class="featured-products">
+    <div class="container">
+        <div style="width: 100%; display: flex;">
+            <p style="width: 50%; text-align: left; font-size: 1.7dvh; padding-left: 2dvh;" > {{usuario}}</p>
+            <!-- <a style="width: 40%;  text-align: right;">Añadir producto</a> -->
+             <a href="{% url 'addProducto' %}" style="width: 50%;  text-align: right; color: white">Añadir producto</a>
+        </div>
+        <h2>Catálogo de Productos</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="{% static 'img/product1.jpg' %}" alt="Producto 1">
+                <h3>Producto Premium</h3>
+                <p>Calidad y diseño en cada detalle.</p>
+                <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Personalizar</a>
+            </div>
+            <div class="product-card">
+                <img src="{% static 'img/product2.png' %}" alt="Producto 2">
+                <h3>Edición Limitada</h3>
+                <p>Exclusividad para ti.</p>
+                <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Personalizar</a>
+            </div>
+            <div class="product-card">
+                <img src="{% static 'img/product3.jpg' %}" alt="Producto 3">
+                <h3>Clásico Moderno</h3>
+                <p>Elegancia atemporal.</p>
+                <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Personalizar</a>
+            </div>
+        </div>
+    </div>
+  </section>
+{% endblock %} 

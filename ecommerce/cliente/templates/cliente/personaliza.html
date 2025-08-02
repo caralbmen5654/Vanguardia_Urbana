@@ -1,4 +1,4 @@
-{% extends 'base_frontend.html' %}
+{% extends 'cliente/catalogo.html' %}
 
 {% block title %}Personaliza | Vanguardia Urbana{% endblock %}
 
@@ -36,6 +36,18 @@
   }
 </style>
 {% endblock %}
+{% block personaliza %}
+  <a href="{% url 'frontend_personaliza' %}" style="color: #d4af37">Personaliza </a>
+{% endblock %}
+{% block carrito %}{% endblock %}
+{% block prodcuctos %}
+    <a href="{% url 'frontend_catalogoVendedor' %}"style="color:#fff">Productos</a>
+{% endblock %}
+
+{% block inicio %}
+  <a href="{% url 'frontend_home' %}">Logout</a>
+{% endblock %}
+{% block login %} {% endblock %}
 
 {% block content %}
 <section>
@@ -53,6 +65,7 @@
         <input type="text" id="texto" placeholder="Escribe tu mensaje...">
         <label for="imgInput">O sube una imagen</label>
         <input type="file" id="imgInput" accept="image/*">
+        
         <div id="konva-container" style="width:320px; height:400px; margin:2rem auto; border-radius:12px; background:#181818;"></div>
         <div style="margin:1rem 0; display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; align-items:center;">
           <button id="deleteImgBtn" type="button" style="padding:0.5rem 1rem; border-radius:6px; border:none; background:#c00; color:#fff; font-weight:700; cursor:pointer;">Eliminar imagen</button>
