@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block personaliza %}
-  <a href="{% url 'frontend_personaliza' %}"></a>
+  
 {% endblock %}
 
 {% block prodcuctos %}
@@ -43,27 +43,9 @@
                 <img src="{{ variante.imagen.url }}" alt="Producto {{variante.id}}">
                 <h3>{{ variante.producto.nombre }}</h3>
                 <p>{{ variante.producto.descripcion }}</p>
-                <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Personalizar</a>
+                <a href="{% url 'frontend_personaliza' variante.id %}" class="btn-secondary">Personalizar</a>
             </div>
           {% endfor %}
-            <!-- <div class="product-card">
-                <img src="{% static 'img/product1.jpg' %}" alt="Producto 1">
-                <h3>Producto Premium</h3>
-                <p>Calidad y diseño en cada detalle.</p>
-                <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Personalizar</a>
-            </div>
-            <div class="product-card">
-                <img src="{% static 'img/product2.png' %}" alt="Producto 2">
-                <h3>Edición Limitada</h3>
-                <p>Exclusividad para ti.</p>
-                <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Personalizar</a>
-            </div>
-            <div class="product-card">
-                <img src="{% static 'img/product3.jpg' %}" alt="Producto 3">
-                <h3>Clásico Moderno</h3>
-                <p>Elegancia atemporal.</p>
-                <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Personalizar</a>
-            </div> -->
         </div>
     </div>
   </section>

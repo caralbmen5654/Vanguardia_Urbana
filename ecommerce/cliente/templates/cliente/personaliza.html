@@ -34,10 +34,11 @@
     padding: 1.5rem;
     color: #fff;
   }
+  
 </style>
 {% endblock %}
 {% block personaliza %}
-  <a href="{% url 'frontend_personaliza' %}" style="color: #d4af37">Personaliza </a>
+  <a href="#" style="color: #d4af37">Personaliza </a>
 {% endblock %}
 {% block carrito %}{% endblock %}
 {% block prodcuctos %}
@@ -54,20 +55,29 @@
   <div class="container">
     <h2 style="color:#d4af37;text-align:center;margin-top:2rem;">Personaliza tu Producto</h2>
       <div class="editor">
-        <label for="color">Color principal</label>
+        <!-- <label for="color">Color principal</label>
         <select id="color">
           <option>Negro</option>
           <option>Blanco</option>
           <option>Dorado</option>
           <option>Gris</option>
-        </select>
+        </select> -->
         <label for="texto">Texto personalizado</label>
         <input type="text" id="texto" placeholder="Escribe tu mensaje...">
         <label for="imgInput">O sube una imagen</label>
         <input type="file" id="imgInput" accept="image/*">
         
-        <div id="konva-container" style="width:320px; height:400px; margin:2rem auto; border-radius:12px; background:#181818;"></div>
+        <div id="konva-container" 
+          style="width:320px; height:400px; margin:2rem auto; border-radius:12px; 
+          background-image: url('{{ variante.imagen.url }}');
+          background-position: center; background-size: cover;">
+        
+        </div>
         <div style="margin:1rem 0; display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; align-items:center;">
+          
+            <input type="text" id="descripcion" style="width: 80%; text-align: center;" placeholder="Descripción del producto">
+            
+         
           <button id="deleteImgBtn" type="button" style="padding:0.5rem 1rem; border-radius:6px; border:none; background:#c00; color:#fff; font-weight:700; cursor:pointer;">Eliminar imagen</button>
           <button id="deleteTextBtn" type="button" style="padding:0.5rem 1rem; border-radius:6px; border:none; background:#c00; color:#fff; font-weight:700; cursor:pointer;">Eliminar texto</button>
           <label style="color:#d4af37; font-weight:600;">Color texto
@@ -76,7 +86,8 @@
           <button id="rotateImgBtn" type="button" style="padding:0.5rem 1rem; border-radius:6px; border:none; background:#d4af37; color:#181818; font-weight:700; cursor:pointer;">Rotar imagen</button>
           <button id="rotateTextBtn" type="button" style="padding:0.5rem 1rem; border-radius:6px; border:none; background:#d4af37; color:#181818; font-weight:700; cursor:pointer;">Rotar texto</button>
         </div>
-        <a href="{% url 'frontend_carrito' %}" class="btn-main">Añadir al carrito</a>
+        <!-- <a href="{% url 'frontend_carrito' %}" class="btn-main">Guardar</a> -->
+        <button id="guardarEdicion" class="btn-main">Guardar</button>
       </div>
     </div>
   </section>
@@ -104,7 +115,8 @@
     });
     layer.add(baseImg);
     const baseObj = new window.Image();
-    baseObj.src = 'assets/img/blank1.jpeg';
+    // baseObj.src = 'assets/img/blank1.jpeg';
+    baseObj.src= '{{variante.imagen.url}}'
     baseObj.onload = function() {
       baseImg.image(baseObj);
       layer.draw();
@@ -230,5 +242,29 @@
         selectNode(null);
       }
     });
+
+    document.getElementById('guardarEdicion').onclick = function() {
+      const dataURL = stage.toDataURL({ pixelRatio: 2 });
+      fetch('/guardar-edicion/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify({
+          imagen: dataURL,
+          variante_id: '{{ variante.id }}'
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert(data);
+        if (data.success) {
+          window.location.replace('{% url "frontend_catalogoVendedor" %}');
+        } else {
+          alert('Error al guardar la edición');
+        }
+      });
+    };
   </script>
 {% endblock %} 

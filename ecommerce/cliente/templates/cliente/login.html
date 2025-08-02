@@ -17,9 +17,11 @@
 
 {% block content %}
  {% if messages %}
-    <script>
-        alert("{{ message }}");
-    </script>     
+    {% for message in messages %}
+      <script>
+          alert("{{ message }}");
+      </script>     
+    {% endfor %}
 {% endif %}
   <div class="login-container">
     <h2>Iniciar Sesión</h2>
