@@ -52,6 +52,9 @@
   .remove-btn {
     background: #c53030 !important;
     color: white !important;
+    border-radius: 5px;
+    padding: .5dvh;
+    text-decoration: none;
   }
   .remove-btn:hover {
     background: #a02020 !important;
@@ -68,6 +71,7 @@
 {% endblock %}
 
 {% block content %}
+
   <section>
     <div class="container">
       <h2 style="color:#d4af37;text-align:center;margin-top:2rem;">Tu Carrito</h2>
@@ -86,7 +90,8 @@
               <button onclick="decreaseQuantity(1)">-</button>
               <span class="quantity" id="qty-1">1</span>
               <button onclick="increaseQuantity(1)">+</button>
-              <button onclick="removeItem(1)" class="remove-btn">Eliminar</button>
+              <!-- <button onclick="removeItem(1)" class="remove-btn">Eliminar</button> -->
+              <a href="{% url 'eliminarCarrito' producto.id %}" onclick="removeItem(1)" class="remove-btn">Eliminar</a>
             </div>
           </div>
         {% endfor %}

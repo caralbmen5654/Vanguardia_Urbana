@@ -23,6 +23,7 @@ urlpatterns = [
     path('frontend/catalogo/', views.frontend_catalogo, name='frontend_catalogo'),
     path('frontend/catalogoVendedor/', views.frontend_catalogo_vendedor, name='frontend_catalogoVendedor'),
     path('agregar-carrito/<int:producto_id>/', views.agregarCarrito, name= 'agregarCarrito'),
+    path('eliminar-carrito/<int:producto_id>/', views.eliminarCarrito, name= 'eliminarCarrito'),
     path('frontend/carrito/', views.frontend_carrito, name='frontend_carrito'),
     path('frontend/checkout/', views.frontend_checkout, name='frontend_checkout'),
     path('frontend/contacto/', views.frontend_contacto, name='frontend_contacto'),

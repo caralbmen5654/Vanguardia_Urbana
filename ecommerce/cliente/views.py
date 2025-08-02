@@ -203,6 +203,8 @@ def frontend_carrito(request):
     # return render(request, 'cliente/carrito.html',{'producto': producto})
     carrito= request.session.get('carrito',[])
     productos= Variante_p.objects.filter(id__in=carrito)
+    if producto not in productos:
+        alerts.error(request, 'Aún no hay productos en tu carrito')
     return render(request, 'cliente/carrito.html',{'productos': productos})
 
 def agregarCarrito(request, producto_id):
@@ -212,9 +214,18 @@ def agregarCarrito(request, producto_id):
     request.session['carrito']= carrito
     return redirect('frontend_carrito')
 
+def eliminarCarrito(request, producto_id):
+    carrito= request.session.get('carrito',[])
+    if producto_id in carrito:
+        carrito.remove(producto_id)
+    request.session['carrito']= carrito
+    return redirect('frontend_carrito')
+
 def frontend_checkout(request):
-    """Vista para el proceso de pago"""
-    return render(request, 'cliente/checkout.html')
+    carrito = request.session.get('carrito', [])
+    productos = Variante_p.objects.filter(id__in=carrito)
+    total = sum([p.producto.precio_base for p in productos])
+    return render(request, 'cliente/checkout.html', {'productos': productos, 'total': total})
 
 def frontend_contacto(request):
     """Vista para la página de contacto"""
