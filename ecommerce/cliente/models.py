@@ -41,8 +41,16 @@ class Variante_p(models.Model):
         ('Amarillo', 'Amarillo'),
         ('Rojo', 'Rojo'),
     ]
+    
+    categorias = [
+        ('Niños', 'Niños'),
+        ('Hombre', 'Hombre'),
+        ('Mujer', 'Mujer'),
+    ]
     producto= models.ForeignKey(producto, related_name='variantes', on_delete=models.CASCADE)
     color= models.CharField('Color', max_length=10, choices=colores)
+    talla= models.IntegerField('Talla', null=False)
+    categoria = models.CharField('Categoría', max_length=10, choices=categorias)
     imagen= models.ImageField('Imagen',upload_to='productos/')
     stock= models.PositiveIntegerField(
         'Cantidad en stock',

@@ -15,6 +15,7 @@ urlpatterns = [
          views.actualizarProducto,
          name='actualizarProducto',
     ),
+    
     path('anadirProducto', views.addProducto, name='addProducto'),
     
     # URLs del frontend integrado

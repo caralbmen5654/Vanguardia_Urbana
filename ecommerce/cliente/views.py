@@ -99,15 +99,16 @@ def addProducto(request):
                 variante.producto=producto
                 variante.save()
                 alerts.success(request, 'Peoducto Agregado Correctamente')
-                return redirect('home_vendedor')
+                #return redirect('home_vendedor')
+                return redirect('frontend_catalogoVendedor')
             except Exception as e:
                 print(e)
-               # alerts.error(request, f'Error al guardar: {e}')
+                alerts.error(request, f'Error al guardar: {e}')
         else:
-            #print("Formularios INvalidos")
-            alerts.success(request,'Fallo en los datos')
+            print("Formularios INvalidos")
+            #alerts.success(request,'Fallo en los datos')
     else:
-        #print("No se envio")
+        print("No se envio")
         form_producto= formProducto()
         variante_form= Varianteform()
         alerts.success(request,'Fallo al agregar' )
@@ -171,7 +172,10 @@ def actualizarProducto(request, variante_id):
 # Vistas para el frontend integrado
 def frontend_home(request):
     """Vista para la página principal del frontend"""
-    return render(request, 'cliente/index.html')
+    #return render(request, 'cliente/index.html')
+    variantes= Variante_p.objects.all()
+    return render(request, 'cliente/index.html',{'variantes':variantes})
+
 
 def frontend_catalogo(request):
     # """Vista para el catálogo de productos"""

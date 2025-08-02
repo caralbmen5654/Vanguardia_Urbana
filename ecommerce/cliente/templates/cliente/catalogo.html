@@ -27,6 +27,14 @@
      <!-- <p style="width: 100%; text-align: left; font-size: 1.5dvh; padding-left: 2dvh;"> {{usuario}}</p> -->
       <h2>Catálogo de Productos</h2>
       <div class="products-grid">
+        {% for producto in productos %}
+          <div class="product-card">
+            <img src="{{ producto.imagen.url }}" alt="Producto {{producto.id}}">
+            <h3>{{ producto.producto.nombre }}</h3>
+            <p>{{ producto.producto.descripcion }}</p>
+            <a href="{% url 'frontend_carrito' %}" class="btn-secondary">Añadir al carrito</a>
+          </div>
+        {% endfor %}
         <div class="product-card">
           <img src="{% static 'img/product1.jpg' %}" alt="Producto 1">
           <h3>Producto Premium</h3>
