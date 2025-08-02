@@ -32,7 +32,7 @@
               <p>Precio: ${{ variante.producto.precio_base }}</p>
             </span>
             
-            <a href="{% url 'frontend_carrito' %}" class="btn-secondary">Añadir al carrito</a>
+            <a href="{% url 'agregarCarrito' variante.id %}" class="btn-secondary">Añadir al carrito</a>
           </div>
         {% endfor %}
 

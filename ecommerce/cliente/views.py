@@ -199,7 +199,18 @@ def frontend_catalogo_vendedor(request):
 
 def frontend_carrito(request):
     """Vista para el carrito de compras"""
-    return render(request, 'cliente/carrito.html')
+    # producto= Variante_p.objects.get(id=producto_id)
+    # return render(request, 'cliente/carrito.html',{'producto': producto})
+    carrito= request.session.get('carrito',[])
+    productos= Variante_p.objects.filter(id__in=carrito)
+    return render(request, 'cliente/carrito.html',{'productos': productos})
+
+def agregarCarrito(request, producto_id):
+    carrito= request.session.get('carrito',[])
+    if producto_id not in carrito:
+        carrito.append(producto_id)
+    request.session['carrito']= carrito
+    return redirect('frontend_carrito')
 
 def frontend_checkout(request):
     """Vista para el proceso de pago"""

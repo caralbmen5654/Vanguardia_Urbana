@@ -34,7 +34,7 @@
             <p>{{ producto.producto.descripcion }}</p>
             <p>Talla: {{ producto.talla }}</p>
             <p>${{ producto.producto.precio_base }}</p>
-            <a href="{% url 'frontend_carrito' %}" class="btn-secondary">Añadir al carrito</a>
+            <a href="{% url 'agregarCarrito' producto.id %}" class="btn-secondary">Añadir al carrito</a>
           </div>
         {% endfor %}
         <!-- <div class="product-card">
