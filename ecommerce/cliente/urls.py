@@ -1,7 +1,8 @@
 from django.urls import path
 from . import views
 urlpatterns = [
-    path('', views.home, name='home'),
+      path('', views.frontend_home, name='frontend_home'),
+    path('home', views.home, name='home'),
     path('base', views.base, name='base'),
     
     path('base_login', views.base_login, name='base_login'),
@@ -19,7 +20,7 @@ urlpatterns = [
     path('anadirProducto', views.addProducto, name='addProducto'),
     
     # URLs del frontend integrado
-    path('frontend/', views.frontend_home, name='frontend_home'),
+  
     path('frontend/catalogo/', views.frontend_catalogo, name='frontend_catalogo'),
     path('frontend/catalogoVendedor/', views.frontend_catalogo_vendedor, name='frontend_catalogoVendedor'),
     path('agregar-carrito/<int:producto_id>/', views.agregarCarrito, name= 'agregarCarrito'),

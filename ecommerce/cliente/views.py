@@ -4,6 +4,13 @@ from django.contrib import messages as alerts
 from .forms import Registro, loginn, Varianteform, formProducto
 #from django.contrib.auth import get_user_model
 # Create your views here.
+def frontend_home(request):
+    """Vista para la página principal del frontend"""
+    #return render(request, 'cliente/index.html')
+    variantes= Variante_p.objects.order_by('?')[:5]
+    #variantes= producto.objects.all()
+    return render(request, 'cliente/index.html',{'variantes':variantes})
+
 def home(request):
     variantes= Variante_p.objects.all()
     return render(request, 'paginas/index.html',{'variantes':variantes})
@@ -110,7 +117,6 @@ def addProducto(request):
        
         form_producto= formProducto()
         variante_form= Varianteform()
-        alerts.error(request,'Fallo al agregar' )
     return render(request, 'paginas/agregarProducto.html',{
         'usuario':usuarioo,
         'form_producto': form_producto,
@@ -169,12 +175,6 @@ def actualizarProducto(request, variante_id):
 
 
 # Vistas para el frontend integrado
-def frontend_home(request):
-    """Vista para la página principal del frontend"""
-    #return render(request, 'cliente/index.html')
-    variantes= Variante_p.objects.order_by('?')[:5]
-    #variantes= producto.objects.all()
-    return render(request, 'cliente/index.html',{'variantes':variantes})
 
 
 def frontend_catalogo(request):

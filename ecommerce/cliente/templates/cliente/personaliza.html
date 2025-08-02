@@ -51,6 +51,13 @@
 {% block login %} {% endblock %}
 
 {% block content %}
+{% if messages %}
+    {% for message in messages %}
+      <script>
+          alert("{{ message }}");
+      </script>     
+    {% endfor %}
+{% endif %}
 <section>
   <div class="container">
     <h2 style="color:#d4af37;text-align:center;margin-top:2rem;">Personaliza tu Producto</h2>
