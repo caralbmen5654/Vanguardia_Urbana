@@ -17,19 +17,10 @@
 
 {% block content %}
  {% if messages %}
-
-       <!-- {% for message in messages %} -->
-            <script>
-                alert("{{ message }}");
-            </script>
-       <!-- {% endfor %}
-         {% for message in messages %}
-            <div class="alert alert-info" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %} -->
-         
-    {% endif %}
+    <script>
+        alert("{{ message }}");
+    </script>     
+{% endif %}
   <div class="login-container">
     <h2>Iniciar Sesión</h2>
     <form method="post" style="align-items: center;" style="color:black;">

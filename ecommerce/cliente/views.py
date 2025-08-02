@@ -105,13 +105,12 @@ def addProducto(request):
                 print(e)
                 alerts.error(request, f'Error al guardar: {e}')
         else:
-            print("Formularios INvalidos")
-            #alerts.success(request,'Fallo en los datos')
+            alerts.error(request,'Fallo en los datos')
     else:
-        print("No se envio")
+       
         form_producto= formProducto()
         variante_form= Varianteform()
-        alerts.success(request,'Fallo al agregar' )
+        alerts.error(request,'Fallo al agregar' )
     return render(request, 'paginas/agregarProducto.html',{
         'usuario':usuarioo,
         'form_producto': form_producto,
@@ -173,7 +172,8 @@ def actualizarProducto(request, variante_id):
 def frontend_home(request):
     """Vista para la página principal del frontend"""
     #return render(request, 'cliente/index.html')
-    variantes= Variante_p.objects.all()
+    variantes= Variante_p.objects.order_by('?')[:5]
+    #variantes= producto.objects.all()
     return render(request, 'cliente/index.html',{'variantes':variantes})
 
 

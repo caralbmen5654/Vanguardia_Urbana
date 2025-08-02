@@ -15,11 +15,23 @@
     <div class="container">
       <h2>Productos Destacados</h2>
       <div class="products-grid">
+
         {% for variante in variantes %}
           <div class="product-card">
+            <!-- <p>Vendedor: <a href="mailto: {{variante.producto.usuario.correo}}?subject=Informes sobre {{variante.producto.nombre}}" style="color:#ccc">{{variante.producto.usuario.correo}}</a></p> -->
+            <p>Vendedor: 
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ variante.producto.usuario.correo }}&su=Informes sobre {{ variante.producto.nombre }}"  style="color:#ccc; text-decoration: none;">
+                {{ variante.producto.usuario.correo }}
+              </a>
+            </p>
             <img src="{{ variante.imagen.url }}" alt="Producto {{variante.id}}">
             <h3>{{ variante.producto.nombre }}</h3>
             <p>{{ variante.producto.descripcion }}</p>
+            <span>
+              <p>Talla: {{ variante.talla }}</p>
+              <p>Precio: ${{ variante.producto.precio_base }}</p>
+            </span>
+            
             <a href="{% url 'frontend_carrito' %}" class="btn-secondary">Añadir al carrito</a>
           </div>
         {% endfor %}
@@ -27,7 +39,7 @@
 
 
        
-        <div class="product-card">
+        <!-- <div class="product-card">
           <img src="{% static 'img/2vanu.jpeg' %}" alt="Producto 2">
           <h3>Edición Limitada</h3>
           <p>Exclusividad para ti.</p>
@@ -38,7 +50,7 @@
           <h3>Clásico Moderno</h3>
           <p>Elegancia atemporal.</p>
           <a href="{% url 'frontend_carrito' %}" class="btn-secondary">Añadir al carrito</a>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>

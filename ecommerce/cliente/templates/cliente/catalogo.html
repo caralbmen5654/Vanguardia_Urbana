@@ -32,10 +32,12 @@
             <img src="{{ producto.imagen.url }}" alt="Producto {{producto.id}}">
             <h3>{{ producto.producto.nombre }}</h3>
             <p>{{ producto.producto.descripcion }}</p>
+            <p>Talla: {{ producto.talla }}</p>
+            <p>${{ producto.producto.precio_base }}</p>
             <a href="{% url 'frontend_carrito' %}" class="btn-secondary">Añadir al carrito</a>
           </div>
         {% endfor %}
-        <div class="product-card">
+        <!-- <div class="product-card">
           <img src="{% static 'img/product1.jpg' %}" alt="Producto 1">
           <h3>Producto Premium</h3>
           <p>Calidad y diseño en cada detalle.</p>
@@ -52,7 +54,7 @@
           <h3>Clásico Moderno</h3>
           <p>Elegancia atemporal.</p>
           <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Añadir al carrito</a>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
