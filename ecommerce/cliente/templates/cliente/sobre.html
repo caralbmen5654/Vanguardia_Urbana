@@ -1,4 +1,5 @@
 {% extends 'base_frontend.html' %}
+{% load static %}
 
 {% block title %}Sobre Nosotros | Vanguardia Urbana{% endblock %}
 
@@ -63,23 +64,23 @@
         <h3>Nuestro equipo</h3>
         <div class="team">
           <div class="team-member">
-            <img src="assets/img/team1.jpg" alt="Jose Pozas Co-founder">
+            <img src="{% static 'img/fundador1.jpg' %}" alt="Jose Pozas Co-founder">
             <strong>Jose Pozas</strong>
             <span>Co-Fundador & CEO</span>
           </div>
           <div class="team-member">
-            <img src="assets/img/team2.jpg" alt="Gabriel Martinez Co-founder">
+            <img src="{% static 'img/fundador2.jpg' %}" alt="Gabriel Martinez Co-founder">
             <strong>Gabriel Martinez</strong>
             <span>Co-Fundador</span>
           </div>
           <div class="team-member">
-            <img src="assets/img/team3.jpg" alt="Oswaldo Carrillo Co-founder">
-            <strong>Oswaldo Carrillo </strong>
+            <img src="{% static 'img/fundador3.jpg' %}" alt="Jaime Gonzalez Co-founder">
+            <strong>Jaime Gonzalez</strong>
             <span>Co-Fundador</span>
           </div>
           <div class="team-member">
-            <img src="assets/img/team4.jpg" alt="Jaime Gonzalez Co-founder">
-            <strong>Jaime Gonzalez</strong>
+            <img src="{% static 'img/fundador4.jpg' %}" alt="Oswaldo Carrillo Co-founder">
+            <strong>Oswaldo Carrillo</strong>
             <span>Co-Fundador</span>
           </div>
         </div>

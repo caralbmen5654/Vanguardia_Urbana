@@ -31,6 +31,7 @@ urlpatterns = [
     path('frontend/login/', views.frontend_login, name='frontend_login'),
     path('frontend/perfil/', views.frontend_perfil, name='frontend_perfil'),
     path('frontend/personaliza/<int:id_producto>/', views.frontend_personaliza, name='frontend_personaliza'),
+    path('eliminar-producto/<int:variante_id>/', views.eliminar_producto, name='eliminar_producto'),
     path('frontend/signin/', views.frontend_signin, name='frontend_signin'),
     path('frontend/sobre/', views.frontend_sobre, name='frontend_sobre'),
     path('guardar-edicion/', views.guardar_edicion, name='guardar_edicion'),

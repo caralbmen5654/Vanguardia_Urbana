@@ -337,3 +337,32 @@ def guardar_edicion(request):
         #nueva_variante.save()
         return JsonResponse({'success': True})
     return JsonResponse({'success': False})
+
+
+def eliminar_producto(request, variante_id):
+    """Vista para eliminar un producto (variante)"""
+    try:
+        # Verificar que el usuario esté autenticado
+        usuario = request.session.get('usuario')
+        if not usuario:
+            alerts.error(request, 'Debes iniciar sesión para eliminar productos.')
+            return redirect('frontend_login')
+        
+        # Obtener la variante a eliminar
+        variante = get_object_or_404(Variante_p, id=variante_id)
+        
+        # Verificar que el usuario sea el propietario del producto
+        if variante.producto.usuario.correo != usuario:
+            alerts.error(request, 'No tienes permisos para eliminar este producto.')
+            return redirect('frontend_catalogoVendedor')
+        
+        # Eliminar la variante
+        producto_nombre = variante.producto.nombre
+        variante.delete()
+        
+        alerts.success(request, f'El producto "{producto_nombre}" ha sido eliminado exitosamente.')
+        
+    except Exception as e:
+        alerts.error(request, 'Error al eliminar el producto. Intenta nuevamente.')
+    
+    return redirect('frontend_catalogoVendedor')
