@@ -56,10 +56,17 @@
         <button type="submit" class="btn-main">Confirmar y pagar</button>
       </form>
       <div class="order-summary">
-        <strong>Resumen del pedido:</strong><br>
-        Producto Premium x1<br>
-        Edición Limitada x2<br>
-        <span style="color:#d4af37;">Total: $2,500.00</span>
+        <strong>Resumen del pedido:</strong>
+        <ul>
+          {% for producto in productos %}
+            <li>
+              {{ producto.producto.nombre }} - ${{ producto.producto.precio_base }}
+            </li>
+          {% endfor %}
+        </ul>
+        <span style="color:#d4af37;">
+          <br>Total: ${{ total }}
+        </span>
       </div>
     </div>
   </section>

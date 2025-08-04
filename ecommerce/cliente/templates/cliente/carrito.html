@@ -52,6 +52,9 @@
   .remove-btn {
     background: #c53030 !important;
     color: white !important;
+    border-radius: 5px;
+    padding: .5dvh;
+    text-decoration: none;
   }
   .remove-btn:hover {
     background: #a02020 !important;
@@ -68,40 +71,37 @@
 {% endblock %}
 
 {% block content %}
+{% if messages %}
+    {% for message in messages %}
+      <script>
+          alert("{{ message }}");
+      </script>     
+    {% endfor %}
+{% endif %}
   <section>
     <div class="container">
       <h2 style="color:#d4af37;text-align:center;margin-top:2rem;">Tu Carrito</h2>
       <div class="cart-list">
-        <div class="cart-item" id="item-1">
-          <img src="{% static 'img/product1.jpg' %}" alt="Producto 1">
-          <div class="cart-details">
-            <strong>Producto Premium</strong><br>
-            Color: Negro<br>
-            Texto: ¡Ejemplo personalizado!<br>
-            <span class="item-price" data-price="850">$850.00 c/u</span>
+
+        {% for producto in productos %}
+          <div class="cart-item" id="item-1">
+            <img src="{{ producto.imagen.url }}" alt="Producto {{producto.id}}">
+            <div class="cart-details">
+              <strong>{{producto.producto.nombre}}</strong><br>
+              Color: {{producto.producto.color}}<br>
+              <br>
+              <span class="item-price" data-price="{{producto.producto.precio_base}}">${{producto.producto.precio_base}} c/u</span>
+            </div>
+            <div class="cart-actions">
+              <button onclick="decreaseQuantity(1)">-</button>
+              <span class="quantity" id="qty-1">1</span>
+              <button onclick="increaseQuantity(1)">+</button>
+              <!-- <button onclick="removeItem(1)" class="remove-btn">Eliminar</button> -->
+              <a href="{% url 'eliminarCarrito' producto.id %}" onclick="removeItem(1)" class="remove-btn">Eliminar</a>
+            </div>
           </div>
-          <div class="cart-actions">
-            <button onclick="decreaseQuantity(1)">-</button>
-            <span class="quantity" id="qty-1">1</span>
-            <button onclick="increaseQuantity(1)">+</button>
-            <button onclick="removeItem(1)" class="remove-btn">Eliminar</button>
-          </div>
-        </div>
-        <div class="cart-item" id="item-2">
-          <img src="{% static 'img/product2.jpg' %}" alt="Producto 2">
-          <div class="cart-details">
-            <strong>Edición Limitada</strong><br>
-            Color: Dorado<br>
-            Texto: <br>
-            <span class="item-price" data-price="825">$825.00 c/u</span>
-          </div>
-          <div class="cart-actions">
-            <button onclick="decreaseQuantity(2)">-</button>
-            <span class="quantity" id="qty-2">2</span>
-            <button onclick="increaseQuantity(2)">+</button>
-            <button onclick="removeItem(2)" class="remove-btn">Eliminar</button>
-          </div>
-        </div>
+        {% endfor %}
+
         <div class="cart-total">
           Total: <span id="total-amount">$2,500.00</span>
         </div>

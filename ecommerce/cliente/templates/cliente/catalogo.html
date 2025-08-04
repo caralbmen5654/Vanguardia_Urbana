@@ -6,9 +6,6 @@
   <a href="{% url 'frontend_home' %}" style="color:#ffffff">Inicio</a>
 {% endblock %}
 
-{% block personaliza %}
-  <a href="{% url 'frontend_personaliza' %}"> </a>
-{% endblock %}
 
 {% block prodcuctos %}
     <a href="{% url 'frontend_catalogo' %}"style="color:#d4af37">Productos</a>
@@ -27,24 +24,17 @@
      <!-- <p style="width: 100%; text-align: left; font-size: 1.5dvh; padding-left: 2dvh;"> {{usuario}}</p> -->
       <h2>Catálogo de Productos</h2>
       <div class="products-grid">
-        <div class="product-card">
-          <img src="{% static 'img/product1.jpg' %}" alt="Producto 1">
-          <h3>Producto Premium</h3>
-          <p>Calidad y diseño en cada detalle.</p>
-          <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Añadir al carrito</a>
-        </div>
-        <div class="product-card">
-          <img src="{% static 'img/product2.png' %}" alt="Producto 2">
-          <h3>Edición Limitada</h3>
-          <p>Exclusividad para ti.</p>
-          <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Añadir al carrito</a>
-        </div>
-        <div class="product-card">
-          <img src="{% static 'img/product3.jpg' %}" alt="Producto 3">
-          <h3>Clásico Moderno</h3>
-          <p>Elegancia atemporal.</p>
-          <a href="{% url 'frontend_personaliza' %}" class="btn-secondary">Añadir al carrito</a>
-        </div>
+        {% for producto in productos %}
+          <div class="product-card">
+            <img src="{{ producto.imagen.url }}" alt="Producto {{producto.id}}">
+            <h3>{{ producto.producto.nombre }}</h3>
+            <p>{{ producto.producto.descripcion }}</p>
+            <p>Talla: {{ producto.talla }}</p>
+            <p>${{ producto.producto.precio_base }}</p>
+            <a href="{% url 'agregarCarrito' producto.id %}" class="btn-secondary">Añadir al carrito</a>
+          </div>
+        {% endfor %}
+       
       </div>
     </div>
   </section>
